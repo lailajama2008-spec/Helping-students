@@ -1,91 +1,30 @@
-# Helping-students
-Your own personal daily schedule organizer
-import React, { useState } from 'react';
-import './App.css';
+# Studentpal
+app where you track time and divide by time you have in a day.
+# StudentPal: The Academic Burnout Shield 
+Built for the 2026 Student Innovation Hackathon
 
-function App() {
-  const [step, setStep] = useState('login'); // login, profile, dashboard
-  const [userData, setUserData] = useState({
-    email: '',
-    grade: '',
-    sleepHours: 8,
-    tasks: []
-  });
+The Problem
+Students today are forced to choose between high grades and healthy sleep. Most planners just list tasks; they don't care if you're exhausted. This leads to burnout, stress, and poor mental health.
+our Solution
+StudentPal is a proactive daily organizer that balances your academic workload with your biological needs. By integrating with school data (via Clever), our AI Agent analyzes your upcoming assignments and your self-reported sleep to create a "human-first" schedule.
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    setStep('profile'); // Move to profile creation after login
-  };
+Key Features
+Clever Integration: One-click sync to pull assignments directly from school portals—no manual typing required.
 
-  const handleProfileSubmit = (e) => {
-    e.preventDefault();
-    setStep('dashboard'); // Move to the main app
-  };
+AI Study Agent: A smart assistant that gives different advice based on your sleep data (e.g., "Take a nap" vs. "Deep work mode").
 
-  return (
-    <div className="App">
-      {step === 'login' && <LoginForm onLogin={handleLogin} />}
-      {step === 'profile' && <ProfileSetup onSave={handleProfileSubmit} setData={setUserData} data={userData} />}
-      {step === 'dashboard' && <Dashboard user={userData} />}
-    </div>
-  );
-}
+Burnout Shield: If sleep is low, the app automatically flags high-difficulty tasks for later and prioritizes rest.
 
-// --- Component: Login ---
-const LoginForm = ({ onLogin }) => (
-  <div className="card">
-    <h2>Student<span>Pal</span></h2>
-    <form onSubmit={onLogin}>
-      <input type="email" placeholder="Student Email" required />
-      <input type="password" placeholder="Password" required />
-      <button type="submit" className="btn-primary">Enter Campus</button>
-    </form>
-  </div>
-);
+Dynamic UI: A dashboard that changes based on the time of day and student energy levels.
 
-// --- Component: Profile & Sleep Logs ---
-const ProfileSetup = ({ onSave, setData, data }) => (
-  <div className="card">
-    <h2>Create Your Profile</h2>
-    <form onSubmit={onSave}>
-      <label>Grade Level</label>
-      <select onChange={(e) => setData({...data, grade: e.target.value})}>
-        <option>9th</option><option>10th</option><option>11th</option><option>12th</option>
-      </select>
-      
-      <label>Avg. Sleep (hrs/night)</label>
-      <input type="number" placeholder="8" onChange={(e) => setData({...data, sleepHours: e.target.value})} />
-      
-      <button type="submit" className="btn-primary">Sync with Infinite Campus</button>
-      <p className="hint">Note: Grades will be pulled automatically via IC API simulation.</p>
-    </form>
-  </div>
-);
+Tech Stack
+Frontend: React.js
 
-// --- Component: Dashboard (The "Planet Fitness" for Students) ---
-const Dashboard = ({ user }) => (
-  <div className="dashboard">
-    <header>
-      <h1>Welcome, {user.grade} Grader</h1>
-      <div className="stat">Sleep Goal: {user.sleepHours} hrs 💤</div>
-    </header>
-    
-    <div className="grid">
-      <section className="card">
-        <h3>Daily Study Checklist</h3>
-        <ul>
-          <li><input type="checkbox" /> Review Bio Notes</li>
-          <li><input type="checkbox" /> Math Problem Set 4</li>
-        </ul>
-      </section>
+Styling: CSS3 
 
-      <section className="card ai-box">
-        <h3>AI Study Agent </h3>
-        <p>"I've noticed you're sleeping {user.sleepHours} hours. Want me to draft a lighter study schedule for today?"</p>
-        <button className="btn-secondary">Generate Flashcards</button>
-      </section>
-    </div>
-  </div>
-);
+Data Simulation: Clever API Mocking
+
+Version Control: GitHub (Collaborative Workflow)
+
 
 export default App;
